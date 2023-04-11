@@ -14,28 +14,27 @@
  * }
  */
 class Solution {
-     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer>ans=new ArrayList<>();
-        if(root==null) return ans;
-
-        Stack<TreeNode>st1=new Stack<>();
-        Stack<TreeNode>st2=new Stack<>();
-
-        st1.push(root);
-        while(!st1.isEmpty()){
-            TreeNode temp=st1.peek();
-            st1.pop();
-            st2.push(temp);
-
-            if(temp.left!=null) st1.push(temp.left);
-            if(temp.right!=null) st1.push(temp.right);
+    public List<Integer> postorderTraversal(TreeNode root) {
+        
+        // Check if the root is null
+        if(root == null){
+            // If the root is null, return an empty ArrayList
+            return new ArrayList<Integer>();
         }
 
-        while(!st2.isEmpty()){
-            ans.add(st2.peek().val);
-            st2.pop();
-        }
-        return ans;
+        // Create a new ArrayList to store the values obtained in a post-order traversal
+        ArrayList<Integer> ans = new ArrayList<>();
 
+        // Recursively perform a post-order traversal on the left subtree and add the obtained values to the ArrayList
+        ans.addAll(postorderTraversal(root.left));
+
+        // Recursively perform a post-order traversal on the right subtree and add the obtained values to the ArrayList
+        ans.addAll(postorderTraversal(root.right));
+
+        // Add the value of the root to the ArrayList
+        ans.add(root.val);
+
+    // Return the ArrayList containing all the values obtained in the post-order traversal
+    return ans;
     }
 }
