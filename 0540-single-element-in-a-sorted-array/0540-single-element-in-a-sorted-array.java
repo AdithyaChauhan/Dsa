@@ -3,7 +3,7 @@ class Solution {
         int start = 0;
         int n = a.length;
         int end = n - 1;
-
+        
         while(start < end) {
             int mid = (start + end)/2;
             if(mid % 2 == 0) {
