@@ -1,40 +1,43 @@
 class Solution {
-    public int minDays(int[] nums, int m, int k) {
-        int n = nums.length;
-        if(m*k > n) return -1;
-        int max = nums[0];
-        int min = max;
-        int ans = 0;
-        for(int i = 0; i < n; i++) {
-            if(nums[i] > max) max = nums[i];
-            if(nums[i] < min) min = nums[i];
-        }  
-        int pairs = m, mid = -1;
-        while(min <= max) {
-            mid = min + (max - min)/2;
-            if(count(nums, mid, m, k)) {
-                max = mid - 1;
-            } else min = mid + 1;
-
+     public int minDays(int[] bloomDay, int m, int k) {
+        if ((long) m * k > bloomDay.length) {
+            return -1;
         }
-            return min;
 
-    }
-    static boolean count(int[] nums, int day, int m , int k) {
-        int n = nums.length;
-        int ct = 0;
-        int pairs = 0;
+        int low = 1, high = (int) 1e9;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
 
-        for(int i = 0; i < n; i++) {
-            if(nums[i] <= day) {
-                ct++;
+            if (isPossibleBouquets(bloomDay, m, k, mid)) {
+                high = mid;
+            } else {
+                low = mid + 1;
             }
-            else {
-                pairs += ct/k;
-                ct = 0;
+        };
+
+        return low;
+    }
+    private boolean isPossibleBouquets(int[] bloomDay, int m, int k, int day) {
+        int total = 0;
+
+        for (int i = 0; i < bloomDay.length; i++) {
+            int count = 0;
+            while (i < bloomDay.length && count < k && bloomDay[i] <= day) {
+                count++;
+                i++;
+            }
+
+            if (count == k) {
+                total++;
+                i--;
+            }
+
+            if (total >= m) {
+                return true;
             }
         }
-        pairs += ct/k;
-        return (pairs >=m);
+
+        return false;
     }
+
 }
