@@ -7,9 +7,7 @@ class Solution {
             if(prices[i] < temp) {
                 temp = prices[i];
             }
-            else if(prices[i] - temp > profit) {
-                profit = prices[i] - temp;
-            }
+            profit = Math.max(profit, prices[i] - temp);
         }
         return profit;
     }
