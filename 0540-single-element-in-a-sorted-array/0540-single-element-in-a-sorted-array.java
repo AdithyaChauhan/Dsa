@@ -3,9 +3,9 @@ class Solution {
         int start = 0;
         int n = a.length;
         int end = n - 1;
-        
+        int mid = 0;
         while(start < end) {
-            int mid = (start + end)/2;
+            mid = (start + end)/2;
             if(mid % 2 == 0) {
                 if(a[mid] == a[mid + 1]) start = mid + 2;
                 else end = mid;
