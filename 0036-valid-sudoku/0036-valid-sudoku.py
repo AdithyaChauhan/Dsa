@@ -9,17 +9,10 @@ class Solution:
 
                 if board[i][j] == '.':
                     continue
-                if board[i][j] not in rows[i]:
+                elif board[i][j] not in rows[i] and board[i][j] not in cols[j] and board[i][j] not in boxes[(i//3,j//3)]:
                     rows[i].add(board[i][j])
-                else:
-                    return False
-                if board[i][j] not in cols[j]:
                     cols[j].add(board[i][j])
-                else:
-                    return False
-                if board[i][j] not in boxes[(i//3,j//3)]:
                     boxes[(i//3,j//3)].add(board[i][j])
                 else:
                     return False
-        
         return True
