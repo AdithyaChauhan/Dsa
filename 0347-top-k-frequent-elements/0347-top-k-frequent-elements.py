@@ -2,9 +2,7 @@ class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         
         count_nums = {}
-        nums_count = {}
         ans = []
-        an = []
         for i in range(len(nums)):
             count_nums[nums[i]] = count_nums.get(nums[i], 0) + 1
         
