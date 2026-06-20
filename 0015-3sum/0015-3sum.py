@@ -1,37 +1,27 @@
 class Solution:
-    def threeSum(self, arr: list[int]) -> list[list[int]]:
-        # Sort the array
-        arr.sort()
-        # Store final result
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+
         ans = []
-        n = len(arr)
-        # First loop for first element
-        for i in range(n):
-            # Skip duplicates for first element
-            if i > 0 and arr[i] == arr[i - 1]:
+        nums.sort()
+        for i in range(len(nums) - 2):
+            low = i + 1
+            end = len(nums) - 1
+            if i > 0 and nums[i] == nums[i - 1]:
                 continue
+            while low < end:
+                
+                if nums[low] + nums[end] == - nums[i]:
+                    ans.append([nums[i],nums[low], nums[end]])
+                    low += 1
+                    end -= 1
+                    while low < end and nums[low] == nums[low - 1]:
+                        low += 1
 
-            # Two pointers
-            left, right = i + 1, n - 1
-
-            # Find pairs for current arr[i]
-            while left < right:
-                total = arr[i] + arr[left] + arr[right]
-
-                if total == 0:
-                    ans.append([arr[i], arr[left], arr[right]])
-                    left += 1
-                    right -= 1
-
-                    # Skip duplicates for left
-                    while left < right and arr[left] == arr[left - 1]:
-                        left += 1
-                    # Skip duplicates for right
-                    while left < right and arr[right] == arr[right + 1]:
-                        right -= 1
-
-                elif total < 0:
-                    left += 1
+                    while low < end and nums[end] == nums[end + 1]:
+                        end -= 1
+                elif nums[low] + nums[end] > - nums[i]:
+                    end -= 1
                 else:
-                    right -= 1
+                    low += 1
+
         return ans
