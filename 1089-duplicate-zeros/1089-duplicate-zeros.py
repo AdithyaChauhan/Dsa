@@ -1,23 +1,28 @@
 class Solution:
-    def duplicateZeros(self, arr: List[int]) -> None:
+    def duplicateZeros(self, nums: List[int]) -> None:
         """
         Do not return anything, modify arr in-place instead.
         """
 
-        start = 0
-        n = len(arr)
-        while start < n - 1:
-            if arr[start] == 0:
-                k = n- 1
-                while k > start + 1:
-                    arr[k] = arr[k - 1]
-                    k -= 1
-                
-                arr[start + 1] = 0
-                
-                start = start + 2
-            
-            else:
-                start += 1
+        count = 0
+        n = len(nums)
+        for i in range(n):
+            if nums[i] == 0:
+                count += 1
 
-        return arr
+        i = n - 1
+        j = i + count
+
+        while count > 0 and i >=0:
+
+            if  j < n:
+                nums[j] = nums[i]
+            j -= 1
+            
+            if nums[i] == 0:
+                if j < n:
+                    nums[j] = nums[i]
+                j -= 1
+                count -=1
+            i -= 1
+        return nums
