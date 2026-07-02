@@ -3,13 +3,19 @@ class Solution:
 
         d = {}
 
-        for ch in magazine:
-            d[ch] = d.get(ch,0) + 1
-
-        for c in ransomNote:
-            if c in d and d[c] > 0:
-                d[c] -= 1
-            else:
-                return False
+        for ch in ransomNote:
+            d[ch] = d.get(ch, 0 ) + 1
         
-        return True
+        for ch in magazine:
+
+            if ch in d:
+                d[ch] -= 1
+
+                if d[ch] == 0:
+                    d.pop(ch)
+        
+            if len(d) == 0:
+                return True
+        
+        return False
+            
