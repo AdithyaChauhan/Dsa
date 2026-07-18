@@ -1,44 +1,44 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        st = []
+        # st = []
 
-        for c in tokens:
-            if c == "+":
-                st.append(st.pop() + st.pop())
-            elif c == "-":
-                second, first = st.pop(), st.pop()
-                st.append(first - second)
-            elif c == "*":
-                st.append(st.pop() * st.pop())
-            elif c == "/":
-                second, first = st.pop(), st.pop()
-                st.append(int(first / second))                
-            else:
-                st.append(int(c))
-        
-        return st[0]
-        # def add(tokens):
-        #     return stack.pop() + stack.pop()
-        # def sub(tokens):
-        #     return - stack.pop() + stack.pop()
-        # def mult(tokens):
-        #     return stack.pop() * stack.pop()
-        # def div(tokens):
-        #     x = stack.pop()
-        #     return stack.pop() //x
-        
-        # stack = []
-
-        # for ch in tokens:
-        #     if ch == "+":
-        #         stack.append(add(tokens))
-        #     elif ch == "-":
-        #         stack.append(sub(tokens))
-        #     elif ch == "/":
-        #         stack.append(div(tokens))
-        #     elif ch == "*":
-        #         stack.append(mult(tokens))
+        # for c in tokens:
+        #     if c == "+":
+        #         st.append(st.pop() + st.pop())
+        #     elif c == "-":
+        #         second, first = st.pop(), st.pop()
+        #         st.append(first - second)
+        #     elif c == "*":
+        #         st.append(st.pop() * st.pop())
+        #     elif c == "/":
+        #         second, first = st.pop(), st.pop()
+        #         st.append(int(first / second))                
         #     else:
-        #         stack.append(int(ch))
+        #         st.append(int(c))
         
-        # return stack[0]
+        # return st[0]
+        def add():
+            return stack.pop() + stack.pop()
+        def sub():
+            return - stack.pop() + stack.pop()
+        def mult():
+            return stack.pop() * stack.pop()
+        def div():
+            x = stack.pop()
+            return int(stack.pop() /x)
+        
+        stack = []
+
+        for ch in tokens:
+            if ch == "+":
+                stack.append(add())
+            elif ch == "-":
+                stack.append(sub())
+            elif ch == "/":
+                stack.append(div())
+            elif ch == "*":
+                stack.append(mult())
+            else:
+                stack.append(int(ch))
+        
+        return stack[0]
